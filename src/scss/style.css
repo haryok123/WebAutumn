@@ -1,0 +1,705 @@
+/* Import fonts */
+@import url("../fonts/Roboto.css");
+/* Reset and normalize */
+@import url("./normalize.css");
+* {
+  margin: 0px;
+}
+
+html {
+  font-size: 3vw;
+}
+
+body {
+  font-family: "Roboto";
+}
+
+.bodyDiv {
+  margin: auto;
+  width: 66.6%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+header {
+  width: 100%;
+}
+
+.topOfHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0px 14px 0;
+}
+
+header h1 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 1px 0 black, -1px -1px 0 red;
+  margin: 0px;
+  padding: 0px;
+}
+
+header h1:hover {
+  color: darkgray;
+}
+
+.searchForm {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
+.searchForm:hover {
+  width: 60%;
+}
+
+.inputArea {
+  width: calc(100% - 2.5rem);
+  padding-left: 3%;
+  font-size: 0.4rem;
+  border: solid 1px darkgray;
+  height: 1.2rem;
+}
+
+.searchButton {
+  margin-left: 10px;
+  width: 2, 5rem;
+  font-size: 0.5rem;
+  height: 1.2rem;
+  background: white;
+  font-weight: 550;
+  border: solid 1px rgb(238, 92, 75);
+  color: rgb(238, 92, 75);
+}
+
+.searchButton:hover {
+  color: white;
+  background-color: rgb(238, 92, 75);
+}
+
+.addTeacherButton a {
+  text-decoration: none;
+  color: rgb(238, 92, 75);
+}
+
+.bottomOfHeader {
+  display: flex;
+  flex-direction: row;
+  height: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  align-self: center;
+  width: 60%;
+}
+
+.menu ul {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 0.6rem;
+}
+
+.menu ul li a {
+  color: rgb(238, 92, 75);
+}
+
+.menu ul li a:hover {
+  color: rgb(158, 64, 6);
+}
+
+.addTeacherButton {
+  width: 30%;
+  font-size: 0.5rem;
+  height: 1.2rem;
+  background: white;
+  font-weight: 550;
+  border: solid 1px rgb(238, 92, 75);
+  color: rgb(238, 92, 75);
+}
+
+.addTeacherButton:hover {
+  color: white;
+  background-color: rgb(238, 92, 75);
+}
+.addTeacherButton:hover a {
+  color: white;
+}
+
+hr {
+  align-self: center;
+  width: 50%;
+  border-color: black;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.topTeachersContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.filtersContainer div {
+  padding-right: 0.3rem;
+  margin-right: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  border-right: 1px dotted rgb(60, 60, 60);
+}
+
+.filtersContainer div:last-child {
+  border: 0px;
+}
+
+.filtersContainer div label {
+  padding-right: 0.1rem;
+  color: darkgray;
+  align-self: center;
+  font-size: 0.4rem;
+}
+
+.filtersContainer div label:hover {
+  color: black;
+}
+
+.filtersContainer select {
+  align-self: center;
+  color: rgb(60, 60, 60);
+  padding: 0.05rem;
+  font-size: 0.5rem;
+  height: 1rem;
+}
+
+.filtersContainer select option {
+  color: rgb(60, 60, 60);
+}
+
+.filtersContainer div input {
+  width: 0.4rem;
+  margin-right: 0.4rem;
+}
+
+.teachersCardsContainer {
+  margin: 20px 0px 10px 0;
+  width: 100%;
+  display: grid;
+  row-gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.photo {
+  width: 3.6rem;
+  height: 3.6rem;
+  display: flex;
+  align-self: center;
+  border-radius: 100%;
+  border: solid 2px rgb(238, 92, 75);
+  overflow: hidden;
+}
+
+.star {
+  width: 1.5rem;
+  position: absolute;
+  right: 2%;
+  top: 0%;
+}
+
+.noPhoto {
+  width: 3.6rem;
+  height: 3.6rem;
+  display: flex;
+  align-self: center;
+  border-radius: 100%;
+  overflow: hidden;
+  width: 3.6rem;
+  height: 3.6rem;
+  display: flex;
+  align-content: center;
+  border: solid 2px rgb(238, 92, 75);
+}
+
+.noPhoto p {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.personPhoto:hover {
+  transform: scale(1.4);
+}
+
+.photo:hover {
+  border: solid 3px rgb(158, 64, 6);
+}
+
+.noPhoto:hover {
+  border: solid 3px rgb(158, 64, 6);
+}
+
+.noPhoto p:hover {
+  transform: scale(1.2);
+}
+
+.nameText, .surnameText {
+  font-size: 0.6rem;
+  font-weight: 650;
+}
+
+.subjectText {
+  margin: 3px 0px 2px 0px;
+  font-size: 0.5rem;
+  color: lightgray;
+}
+
+.countryText {
+  font-size: 0.5rem;
+  color: rgb(42, 37, 36);
+}
+
+.roundedPhoto {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 7rem;
+}
+
+.statisticsTable tbody tr:nth-child(even) {
+  background-color: #efe5ef;
+}
+
+.statisticsTable tbody td {
+  width: 20%;
+  padding: 4px 0px 4px 0px;
+}
+
+.statisticsTable tbody td:first-child {
+  text-align: left;
+  padding-left: 15px;
+}
+
+.statisticsTable {
+  width: 100%;
+  font-size: 0.5rem;
+}
+
+.statisticsTable thead {
+  border-bottom: solid 2px darkgray;
+}
+
+.statisticsTable thead th:hover {
+  background-color: lightgray;
+  border-bottom: solid 3px black;
+}
+.statisticsTable thead th:hover .tableArrow {
+  visibility: inherit;
+}
+
+.statisticsTable thead th {
+  padding: 2px;
+}
+
+.tableArrow {
+  visibility: hidden;
+}
+
+.underTableList {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.underTableList li {
+  font-size: 0.5rem;
+  margin: 4px;
+  color: rgb(143, 187, 207);
+}
+
+.underTableList li:hover {
+  color: blue;
+}
+
+#carouselOfTeacherCards {
+  position: relative;
+  width: 100%;
+}
+
+.overflow {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  gap: 0 10px;
+}
+
+#carouselOfTeacherCards .arrowButton img {
+  opacity: 60%;
+  height: 3rem;
+  width: 1rem;
+}
+
+#carouselOfTeacherCards .arrowButton img:hover {
+  opacity: 100%;
+}
+
+#carouselOfTeacherCards .arrowButtonLeft {
+  position: absolute;
+  top: 1.5rem;
+  left: -1.4rem;
+}
+
+#carouselOfTeacherCards .arrowButtonRight {
+  position: absolute;
+  top: 1.5rem;
+  right: -1.4rem;
+}
+
+#carouselOfTeacherCards .roundedPhoto {
+  height: 6rem;
+}
+
+.paragraphOfText > article {
+  text-align: left;
+  font-size: 0.6rem;
+}
+
+footer {
+  margin: 20px 0px 30px 0px;
+}
+
+.footerContainer {
+  display: flex;
+  flex-direction: row;
+  height: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addTeacherPopupBack {
+  display: none;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+}
+
+.addTeacherPopupBack:target {
+  display: block;
+}
+
+.addTeacherPopup {
+  position: fixed;
+  top: 5vh;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 30vw;
+  left: 40vw;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.popupForm {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.popupHeader {
+  width: 100%;
+  background-color: rgb(68, 64, 64);
+  height: 8vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.popupHeader h3 {
+  color: white;
+  font-size: 3vh;
+  align-self: center;
+  font-weight: 600;
+  padding-left: 10px;
+}
+
+.closePopup {
+  height: 8vh;
+  align-items: center;
+  padding: 0px;
+  margin-right: 5px;
+  width: 1rem;
+  display: flex;
+  color: white;
+  font-size: 3vh;
+  font-weight: 800;
+  background-color: rgb(68, 64, 64);
+  border: 0px;
+  align-self: center;
+}
+
+.closePopup a {
+  color: white;
+}
+
+.popupForm {
+  padding: 3vh;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexColumn label {
+  color: darkgray;
+  margin-bottom: 6px;
+  font-size: 2vh;
+  width: -moz-fit-content;
+  width: fit-content;
+  justify-self: left;
+}
+
+.enterName .addName {
+  padding-left: 5px;
+  color: rgb(29, 25, 25);
+}
+
+.flexColumn input, .flexColumn select {
+  color: rgb(29, 25, 25);
+  margin-bottom: 3px;
+  font-size: 1.5vh;
+  padding: 0px;
+  height: 4vh;
+}
+
+.gridForm {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+}
+
+.gridForm label {
+  margin-top: 6px;
+  font-size: 1.5vh;
+}
+
+.addCountry, .addCity, .addEmail, .addPhone, .addDate {
+  width: 100%;
+}
+
+.addTeacherForm {
+  width: 100%;
+  height: 1.5rem;
+}
+
+.genderChoice {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: 4px 0px 4px 0px;
+}
+
+.genderChoice label {
+  margin: 0px;
+  margin: 0px 0.3rem 0px 0.3rem;
+}
+
+.genderChoice label:first-child {
+  margin: 0px;
+  margin-right: 1.5rem;
+}
+
+.addBgColor {
+  width: 2rem;
+  border: solid 2px darkgray;
+}
+
+.addNotes {
+  width: 100%;
+  height: 10vh;
+  margin-bottom: 0.6rem;
+  resize: none;
+}
+
+.notesContainer label {
+  justify-self: left;
+}
+
+.teacherInfoPopupBack {
+  display: none;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+}
+
+.teacherInfoPopup {
+  position: fixed;
+  top: 15vh;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 50vw;
+  left: 25vw;
+  background-color: white;
+}
+
+.photoPlusData div {
+  width: 40%;
+}
+
+.photoPlusData img {
+  width: 100%;
+}
+
+.teacherInfoPopup img {
+  padding: 1vh;
+  width: 100%;
+}
+
+.photoPlusData {
+  display: flex;
+  flex-direction: row;
+}
+
+.photoPlusData h1 {
+  margin: 2vh 0 2vh 0;
+  font-size: 1.2rem;
+  font-weight: 550;
+}
+
+.photoPlusData h3 {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.teacherDataPopup {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3vh;
+}
+
+.teacherDataPopup p:first-child {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.teacherDataPopup p {
+  margin-bottom: 0.5vh;
+  font-size: 0.5rem;
+  text-align: left;
+}
+
+.email {
+  color: blue;
+}
+
+.dataPopUp p {
+  text-align: left;
+  padding: 1vh;
+  font-size: 0.3rem;
+}
+
+.toggleMap {
+  color: 0;
+  padding: 1vh;
+  display: flex;
+  text-align: left;
+  font-size: 0.4rem;
+}
+
+.teacherInfoPopupBack:target {
+  display: block;
+}
+
+@media screen and (max-width: 800px) {
+  .addTeacherPopup {
+    top: 5vh;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: 40vw;
+    left: 30vw;
+    background-color: white;
+    overflow-y: auto;
+  }
+}
+@media screen and (max-width: 700px) {
+  .teachersCardsContainer {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 600px) {
+  .teachersCardsContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .photo {
+    width: 5rem;
+    height: 5rem;
+  }
+  .noPhoto {
+    width: 5rem;
+    height: 5rem;
+  }
+  .roundedPhoto {
+    height: 9rem;
+  }
+  #carouselOfTeacherCards .roundedPhoto {
+    height: 7.4rem;
+  }
+  .star {
+    width: 1.7rem;
+    right: 15%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .teachersCardsContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+  .star {
+    width: 1.7rem;
+    right: 24%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .teachersCardsContainer {
+    grid-template-columns: 1fr;
+  }
+  .star {
+    width: 1.7rem;
+    right: 37%;
+  }
+}/*# sourceMappingURL=style.css.map */

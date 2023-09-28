@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="uk-UA">
+
+	<head itemscope itemtype="http://schema.org/WebSite">
+
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Project</title>
+
+		<link rel="stylesheet" href="./css/app.css">
+		<link rel="stylesheet" href="./scss/style.css">
+	</head>
+
+	<body itemscope itemtype="http://schema.org/WebPage">
+		<div class="bodyDiv">
+			<header>
+				<div class="topOfHeader">
+					<h1>Teachinder</h1>
+               <form class="searchForm">
+					   <input class="inputArea" placeholder="Name, note or age to search"/>
+					   <button class="searchButton">Search</button>
+               </form>
+				</div>
+
+				<div class="bottomOfHeader">
+
+				<nav class="menu">
+                  <ul>
+                     <li><a>Teachers</a></li>
+                     <li><a>Statistics</a></li>
+                     <li><a>Favorites</a></li>
+                     <li><a>About</a></li>
+                  </ul>
+					</nav>
+               	<button class="addTeacherButton" ><a href="#addTeacherPopupBack">Add teacher</a></button>
+				</div>
+
+			</header>
+			<hr/>
+			<section class="topTeachersContainer">
+				<a href="#teacherInfoPopup"><h2>Top Teachers</h2></a>
+
+				<section class="filtersContainer">
+					<div>
+               	<label>Age</label>
+						<select>
+							<option value="value1">18-31</option>
+							<option value="value2">18</option><optionvalue="value3">>31</option>
+						</select>
+					</div>
+
+					<div>
+               		<label>Region</label>
+						<select>
+							<option value="value1">Europe</option>
+							<option value="value2">USA</option>
+						</select>
+					</div>
+
+					<div>
+                  <label>Sex</label>
+						<select>
+							<option value="value1">Male</option>
+							<option value="value2">Female</option>
+
+						</select>
+					</div>
+
+					<div>
+						<input type="checkbox" id="onlyWithPhoto"/>
+						<label>Only with photo</label>
+					</div>
+
+					<div>
+						<input type="checkbox" id="onlyFavorites"/>
+						<label>Only favorites</label>
+					</div>
+				</section>
+
+
+				<section class="teachersCardsContainer">
+					<div class="roundedPhoto">
+						
+						<div class="photo">
+							<img class="personPhoto" alt="person" src="images\manTeacher.jpg">
+						</div>
+						<img class="star" alt="star" data-star src="images\star.png"></img>
+
+						
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="subjectText">Chemistry</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\manTeacher2.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="subjectText">Chemistry</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\manTeacher1.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="subjectText">Chemistry</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\womanTeacher2.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="subjectText">Chemistry</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\womanTeacher.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="subjectText">Chemistry</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\womanTeacher3.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="subjectText">Chemistry</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="noPhoto">
+							<p>A.M</p>
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="subjectText">Chemistry</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="noPhoto">
+							<p>R.L</p>
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="subjectText">Chemistry</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+				</section>
+
+			</section>
+			<hr/>
+			<section>
+				<h2>Statistics</h2>
+				<table class="statisticsTable">
+					<thead>
+						<tr>
+							<th>Name <span class="tableArrow">↓</span></th>
+                  			<th>Speciality <span class="tableArrow">↓</span></th>
+                  			<th>Age <span class="tableArrow">↓</span></th>
+                 			<th>Gender <span class="tableArrow">↓</span></th>
+                  			<th>Nationality <span class="tableArrow">↓</span></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td>Daisy Alexander</td>
+							<td>Chemistry</td>
+							<td>28</td>
+							<td>Female</td>
+							<td>Vietnam</td>
+						</tr>
+
+						<tr>
+							<td>Julia Bradley</td>
+							<td>Math</td>
+							<td>26</td>
+							<td>Female</td>
+							<td>USA</td>
+						</tr>
+
+						<tr>
+							<td>Rita Hart</td>
+							<td>Art</td>
+							<td>41</td>
+							<td>Female</td>
+							<td>Ireland</td>
+						</tr>
+
+						<tr>
+							<td>Jonathan Jacobs</td>
+							<td>Math</td>
+							<td>32</td>
+							<td>Male</td>
+							<td>England</td>
+						</tr>
+
+						<tr>
+							<td>Nathaniel White</td>
+							<td>Computer Science</td>
+							<td>37</td>
+							<td>Male</td>
+							<td>Austria</td>
+						</tr>
+
+						<tr>
+							<td>Frank Medina</td>
+							<td>English</td>
+							<td>43</td>
+							<td>Male</td>
+							<td>Italy</td>
+						</tr>
+
+						<tr>
+							<td>Ella Curtis</td>
+							<td>Chess</td>
+							<td>34</td>
+							<td>Female</td>
+							<td>USA</td>
+						</tr>
+
+						<tr>
+							<td>Claire Simmons</td>
+							<td>Art</td>
+							<td>38</td>
+							<td>Female</td>
+							<td>Netherlands</td>
+						</tr>
+
+						<tr>
+							<td>Benjamin Knight</td>
+							<td>Biology</td>
+							<td>44</td>
+							<td>Male</td>
+							<td>Scotland</td>
+						</tr>
+
+						<tr>
+							<td>Norma Rose</td>
+							<td>Statistics</td>
+							<td>36</td>
+							<td>Female</td>
+							<td>France</td>
+						</tr>
+					</tbody>
+				</table>
+				<nav>
+					<ol class="underTableList">
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>...</li>
+						<li>Last</li>
+					</ol>
+				</nav>
+			</section>
+			<hr/>
+			<section>
+			<h2>Favorites</h2>
+				<section id="carouselOfTeacherCards">
+				<div class="arrowButton arrowButtonLeft"><img class="arrowLeft" alt="arrow_left" src="images\angle_left_icon.png"/></div>
+					<div class="arrowButton arrowButtonRight"><img class="arrowRight" alt="arrow_right" src="images\angle_right_icon.png"/></div>
+				<div class="overflow">
+					
+
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\womanTeacher3.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\womanTeacher3.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\womanTeacher3.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\womanTeacher3.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+					<div class="roundedPhoto">
+						<div class="photo">
+							<img class="personPhoto" alt="" src="images\womanTeacher3.jpg">
+						</div>
+						<article>
+						<p class="nameText">Ihor</p>
+						<p class="surnameText">Tkachuk</p>
+						<p class="countryText">Ukraine</p>
+						</article>
+					</div>
+				</div>
+				</section>
+			</section>
+			<hr/>
+			<section class="paragraphOfText">
+				<article>
+					Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor
+					        incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+					        nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
+					        ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit
+					        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat
+					        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+							<br></br>
+							Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor
+							<br></br>
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.				</article>
+			</section>
+
+			<footer>
+			<div class="footerContainer">
+				<nav class="menu">
+                  <ul>
+                     <li><a>Teachers</a></li>
+                     <li><a>Statistics</a></li>
+                     <li><a>Favorites</a></li>
+                     <li><a>About</a></li>
+                  </ul>
+					</nav>
+				<button class="addTeacherButton">Add teacher</button>
+			</div>	
+			</footer>
+		
+		
+	<section class="addTeacherPopupBack" id="addTeacherPopupBack">
+      <section class="addTeacherPopup">
+	    <section class="popupHeader">
+		
+          		<h3>Add Teacher</h3>
+		  		<button class="closePopup"><a href="##">x</a></button>
+		    
+        </section>
+
+        <form class="popupForm flexColumn">
+          <fieldset class="enterName flexColumn">
+            <label for="addName">Name</label>
+            <input type="text" class="addName" name="addName" placeholder="Enter name" required/>
+          </fieldset>
+
+          <fieldset class="flexColumn">
+            <label for="addSpeciality">Speciality</label>
+            <select id="addSpeciality" name="addSpeciality" required>
+              <option value="math" selected>Mathematics</option>
+              <option value="physics">Physics</option>
+              <option value="vocal">Vocal</option>
+              <option value="chemistry">Chemistry</option>
+              <option value="chess">Chess</option>
+              <option value="computer-science">Computer Science</option>
+              <option value="biology">Biology</option>
+            </select>
+          </fieldset>
+		<section class="gridForm">
+          <fieldset class="flexColumn">
+            <label for="addCountry">Country</label>
+            <select class="addCountry" name="addCountry" required>
+              <option value="Ukraine" selected>Ukraine</option>
+              <option value="India">India</option>
+              <option value="UK">UK</option>
+              <option value="Belarus">Belarus</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Poland">Poland</option>
+              <option value="Belgium">Belgium</option>
+              <option value="China">China</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="USA">USA</option>
+              <option value="Ireland">Ireland</option>
+              <option value="England">England</option>
+              <option value="Austria">Austria</option>
+              <option value="Italy">Italy</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="Scotland">Scotland</option>
+              <option value="France">France</option>
+            </select>
+
+            <label for="addCity">City</label>
+            <input type="text" class="addCity" name="addCity" />
+          </fieldset>
+
+          <fieldset class="flexColumn">
+            <label for="addEmail">Email</label>
+            <input type="email" class="addEmail" name="addEmail" required />
+
+            <label for="addPhone">Phone</label>
+            <input type="tel" class="addPhone" name="addPhone" required />
+          </fieldset>
+
+          <fieldset class="flexColumn">
+            <label for="addDate">Date of birth</label>
+            <input type="date" class="addDate" name="addDate" required />
+          </fieldset>
+		</section>
+          <fieldset class="genderChoice">
+            <label>Sex</label>
+           
+            <label for="male">Male</label>
+			 <input type="radio" data-sex="male" name="sex" value="male" />
+        
+            <label for="female">Female</label>
+			 <input type="radio" data-sex="female" name="sex" value="female" />
+          </fieldset>
+
+          <fieldset class="genderChoice">
+            <label for="addBgColor">Background color</label>
+            <input type="color" class="addBgColor" name="addBgColor" />
+          </fieldset>
+
+          <fieldset class="flexColumn">
+            <label for="addNotes">Notes (optional)</label>
+            <textarea class="addNotes" name="addNotes" rows="5"></textarea>
+          </fieldset>
+
+          <button type="submit" class="addTeacherButton addTeacherForm">Add</button>
+        </form>
+      </section>
+	</section>
+	<section>
+
+      <section class="teacherInfoPopupBack" id="teacherInfoPopup">
+	  <section class="teacherInfoPopup">
+		<section class="popupHeader">
+          		<h3>Teacher Info</h3>
+		  		<button class="closePopup"><a href="##">x</a></button>
+        </section>
+		<section class="photoPlusData">
+        <div><img class="teacherPhotoInfoPopup" src="images/manTeacher.jpg"alt="teacher man"/>
+		</div>
+		<article class="teacherDataPopup">
+          <h1>Ihor Tkachuk</h1>
+          <address >
+		  	<p>Chemistry</p>
+            <p>Kyiv, Ukraine</p>
+            <p>35, Male</p>
+            <p class="email">ihor_tkachuk@domain.com</p>
+            <p>+380964993252</p>
+          </address>
+        </article>
+		</section>
+        <article class="dataPopUp">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Pellentesque fermentum vel est quis viverra. Praesent lobortis
+            ligula eu erat cursus, eu placerat mauris tempus. Cras tincidunt
+            tempor viverra. Nulla condimentum, neque id interdum venenatis,
+            augue dui vestibulum turpis, accumsan posuere ipsum neque eget
+            massa. Maecenas porta est malesuada interdum aliquam. Donec felis
+            sem, hendrerit at vulputate vel, feugiat id ipsum. Duis auctor
+            dapibus aliquet.
+          </p>
+        </article>
+
+        <a href="" class="toggleMap">toggle map</a>
+      </section> 
+	</section>
+    
+	</div>
+		<script type="text/javascript" src="../build/app.js"></script>
+
+	</body>
+</html>
