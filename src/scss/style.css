@@ -1,7 +1,7 @@
 /* Import fonts */
 @import url("../fonts/Roboto.css");
 /* Reset and normalize */
-@import url("./normalize.css");
+@import url("../css/normalize.css");
 * {
   margin: 0px;
 }
