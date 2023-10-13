@@ -377,9 +377,7 @@ hr{
     backdrop-filter: blur(5px);
 }
 
-.addTeacherPopupBack:target{
-    display: block;
-}
+
 .addTeacherPopup{
     position: fixed;
     top: 5vh;
@@ -410,10 +408,10 @@ hr{
     padding-left: 10px;
 }
 .closePopup{
+    margin-right: 2vh;
     height: 8vh;
     align-items: center;
     padding: 0px;
-    margin-right: 5px;
     width: 1rem;
     display: flex;
     color: white;
@@ -520,16 +518,29 @@ hr{
     background-color: white;
     
 }
+.rightUpOfInfoPopupHeader{
+    display: flex;
+}
+.favoriteStarButton{
+    background-color: rgb(68, 64, 64);
+    border: 0px;
+}
 .photoPlusData div{
     width: 40%;
    }
    .photoPlusData img{
+    align-items: center;
     width: 100%;
    }
-.teacherInfoPopup img{
-    padding: 1vh;
- width: 100%;
+.teacherInfoPopup img{ 
+vertical-align: middle;
+padding: 0;
+width: 3vh;
 }
+.teacherInfoPopup .teacherPhotoInfoPopup{ 
+    margin: 0.7vh;
+    width: 100%;
+    }
 .photoPlusData{
     display: flex;
     flex-direction: row;
@@ -571,9 +582,6 @@ hr{
     display: flex;
     text-align: left;
     font-size: 0.4rem;
-}
-.teacherInfoPopupBack:target{
-    display: block;
 }
 
 
@@ -619,8 +627,15 @@ hr{
     right: 15%;
     
 }
+.addTeacherPopup {
+    top: 5vh;
+    height: fit-content;
+    width: 70vw;
+    left: 15vw;
+}
   }
   @media screen and (max-width: 500px) {
+
     .teachersCardsContainer{
         grid-template-columns: 1fr 1fr;
     }
@@ -629,14 +644,37 @@ hr{
         right: 24%;
         
     }
+    .addTeacherPopup {
+        top: 5vh;
+        height: fit-content;
+        width: 70vw;
+        left: 15vw;
+  }
   }
   @media screen and (max-width: 400px) {
     .teachersCardsContainer{
         grid-template-columns: 1fr;
     }
+    .photo{
+        width: 12vh;
+        height: 12vh;
+    }
+    .noPhoto {
+        width: 12vh;
+        height: 12vh;
+  }
+  .roundedPhoto{
+    
+    height: 18vh;
+  }
+  
+  #carouselOfTeacherCards .roundedPhoto{
+    height: 18vh;
+  }
     .star{
         width: 1.7rem;
         right: 37%;
         
     }
+   
   }

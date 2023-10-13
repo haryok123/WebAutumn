@@ -36,6 +36,15 @@ function mergeObjects(arr1, arr2) {
     }
     return mergedObjects;
 }
+function createHexCode() {
+    let letters = "0123456789ABCDEF";
+    let color = '#';
+
+    for (let i = 0; i < 6; i++)
+        color += letters[(Math.floor(Math.random() * 16))];
+
+    return color;
+}
 //Створюємо юзера з правильно переданими параметрами
 function formatUser(user) {
     let formatedUser = {
@@ -70,7 +79,7 @@ function formatUser(user) {
             "Medicine",
             "Statistics",
         ]),
-        bg_color: "",
+        bg_color: createHexCode(),
         note: "",
 
     }
@@ -98,7 +107,7 @@ function checkValid(users) {
 
 //перевірка на валідність String
 function validString(str) {
-    if (!str || typeof (str) != 'string') {
+    if (!str || typeof (str) !== 'string') {
         return false;
     }
     if (str.charAt(0) === str.charAt(0).toLowerCase()) {
@@ -108,7 +117,7 @@ function validString(str) {
 }
 //перевірка на валідність age
 function checkAge(age) {
-    if (typeof (age) != 'number' || age < 0) {
+    if (typeof (age) !== 'number' || age < 0) {
         return false;
     }
     return true;
@@ -156,34 +165,12 @@ function validatePhone(phone, country) {
 }
 //перевірка на валідність email
 function checkEmail(email) {
-    if (!email || typeof (email) != 'string' || !email.includes("@")) {
+    if (!email || typeof (email) !== 'string' || !email.includes("@")) {
         return false;
     }
     return true;
 }
 
-function filterObjects(array, filters) {
-    return array.filter((item) => {
-        // Перевірка країни
-        if (filters.country && item.country !== filters.country) {
-            return false;
-        }
-        // Перевірка віку
-        if (filters.age && item.age !== filters.age) {
-            return false;
-        }
-        // Перевірка статі
-        if (filters.gender && item.gender !== filters.gender) {
-            return false;
-        }
-        // Перевірка favorite
-        if (typeof filters.favorite !== 'undefined' && item.favorite !== filters.favorite) {
-            return false;
-        }
-        // Якщо об'єкт відповідає всім умовам, повертаємо true
-        return true;
-    });
-}
 // комапаратор
 function compareObjectsByField(param, order) {
     return function (a, b) {
@@ -200,7 +187,11 @@ function compareObjectsByField(param, order) {
 }
 //сортування масиву за param, в порядку order==1 зростанням, order==-1 спаданням
 function sortObjects(array, param, order) {
-    return array.slice().sort(compareObjectsByField(param, order));
+    if(param===0){
+        return array;
+    }else{
+        return array.slice().sort(compareObjectsByField(param, order));
+    }
 }
 
 
@@ -218,6 +209,7 @@ function findObjectByParam(arr, param, value) {
 
             let numbers = [...value.matchAll("[0-9]+")];
             numbers = numbers.map((value) => Number(value));
+
             if (value.includes("<")) {
                 return obj[param] < numbers[0];
             } else if (value.includes(">")) {
@@ -237,7 +229,6 @@ function calcPercentOfFound(arr, value) {
     {
         const numOfMatches = findObjectByParam(arr, "age", ">60").length;
         const totalNum = arr.length;
-        console.log(numOfMatches);
         const percentage = (numOfMatches / totalNum) * 100;
         return percentage + " percents";
     }
@@ -254,17 +245,466 @@ function formatAndMergeUsers(randomUserMockThis, additionalUsersThis) {
 // Приклад використання функції
 const randomUserMockThis = randomUserMock;
 const additionalUsersThis = additionalUsers;
-const result = formatAndMergeUsers(randomUserMockThis, additionalUsersThis);
+let result = formatAndMergeUsers(randomUserMockThis, additionalUsersThis);
 
-console.log(result);
+function createTeacherCardTemplate(teacher, isForFavorites){
+        const nameParts = teacher.full_name.split(' ');
+        const name = nameParts[0];
+        const surname = nameParts.slice(1).join(' ');
 
-console.log(checkValid(result));
+        let photoSrc = teacher.picture_large; 
+        let subject = teacher.course;
+        let country = teacher.country;
+        let favorite = teacher.favorite;
+        // Створюємо основний div з класом "roundedPhoto"
+        const roundedPhotoDiv = document.createElement('div');
+        roundedPhotoDiv.className = 'roundedPhoto';
+      
+        
+        const photoDiv = document.createElement('div');
+        photoDiv.className = 'photo';
+      
+        
+        const personPhotoImg = document.createElement('img');
+        personPhotoImg.className = 'personPhoto';
+        personPhotoImg.alt = 'person';
+        personPhotoImg.src = photoSrc;
+        const starImg = document.createElement('img');
+        if(!isForFavorites){
+        personPhotoImg.addEventListener("click",
+        () => {
+            showTeacherInfoPopup(teacher);
+        });
+        
+        
+        starImg.classList.add('star');
+        starImg.alt = 'star';
+        starImg.src = 'images\\star.png';
+        
+        if(!favorite){
+            starImg.hidden = true;
+        }else{
+            renderFavoriteTeachersTemplates(favoriteTeachers);
+        }
+        }
+        const articleElement = document.createElement('article');
+      
+       
+        const nameText = document.createElement('p');
+        nameText.className = 'nameText';
+        nameText.textContent = name;
+      
+        const surnameText = document.createElement('p');
+        surnameText.className = 'surnameText';
+        surnameText.textContent = surname;
+        const subjectText = document.createElement('p');
+        if(!isForFavorites){
+        subjectText.className = 'subjectText';
+        subjectText.textContent = subject;
+        }
+        const countryText = document.createElement('p');
+        countryText.className = 'countryText';
+        countryText.textContent = country;
+    
+        photoDiv.appendChild(personPhotoImg);
+        roundedPhotoDiv.appendChild(photoDiv);
+        roundedPhotoDiv.appendChild(starImg);
+      
+        articleElement.appendChild(nameText);
+        articleElement.appendChild(surnameText);
+        articleElement.appendChild(subjectText);
+        articleElement.appendChild(countryText);
+      
+        roundedPhotoDiv.appendChild(articleElement);
+       
+        return roundedPhotoDiv;
+      }
+      
+function createTeacherCardsFromArray(arrOfTeachers, teachersCardsContainer, isForFavorites){
+    for(const teacher of arrOfTeachers){
+        const teacherTemplate = createTeacherCardTemplate(teacher, isForFavorites);
+        teachersCardsContainer.appendChild(teacherTemplate);
+    }
+   
+}
 
-console.log(sortObjects(result, "full_name", 1));
-console.log(sortObjects(result, "age", 1));
-console.log(sortObjects(result, "country", 1));
+function showTeacherInfoPopup(teacher){
+    // Отримуємо елементи DOM, які ми хочемо оновити
+    const teacherInfoPopupBack = document.getElementById('teacherInfoPopup');
+    const teacherPhoto = document.querySelector('.teacherPhotoInfoPopup');
+    const teacherName = document.querySelector('.teacherDataPopup h1');
+    const subject = document.querySelector('.teacherDataPopup p:nth-child(1)');
+    const location = document.querySelector('.teacherDataPopup p:nth-child(2)');
+    const ageGender = document.querySelector('.teacherDataPopup p:nth-child(3)');
+    const email = document.querySelector('.teacherDataPopup .email');
+    const phoneNumber = document.querySelector('.teacherDataPopup p:nth-child(5)');
+    
+    const closePopupButton = document.getElementById('closePopupInfoTeacher');
+    // Оновлюємо властивості елементів DOM на основі вхідного об'єкту teacher
+    teacherPhoto.src = teacher.picture_large;
+    teacherName.textContent = teacher.full_name;
+    subject.textContent = teacher.course;
+    location.textContent = teacher.country+", "+ teacher.country;
+    ageGender.textContent = teacher.ageGender;
+    email.textContent = teacher.email;
+    phoneNumber.textContent = teacher.phoneNumber;
+    
+    let favoriteStarButton = document.getElementById('favoriteStarButton');
+    let cloneFavoriteStarButton = favoriteStarButton.cloneNode(true);
+    
+    favoriteStarButton.parentNode.replaceChild(cloneFavoriteStarButton, favoriteStarButton);
+    favoriteStarButton = cloneFavoriteStarButton;
+    // Оновлюємо зображення зірки в залежності від статусу favorite
+    if (teacher.favorite) {
+        favoriteStarButton.innerHTML = '<img src="images\\star-filled.svg" alt="Star Button Filled">';
+    } else {
+        favoriteStarButton.innerHTML = '<img src="images\\star-outline.svg" alt="Star Button Not Filled">';
+    }
+    
+    teacherInfoPopupBack.style.display="block";
+    // Додаємо обробники подій для кнопок
+    cloneFavoriteStarButton.addEventListener('click', () => {
+        favoriteStarButtonClicked(teacher, cloneFavoriteStarButton);
+    }
+    );
 
-console.log(findObjectByParam(result, "full_name", "re"));
+    closePopupButton.addEventListener('click', () => {
+        teacherInfoPopupBack.style.display="none";
+    });
+}
 
-console.log(findObjectByParam(result, "age", ">60"));
-console.log(calcPercentOfFound(result, ">60"));
+function removeObjectByName(array, nameToRemove) {
+    // Використовуємо метод filter() для створення нового масиву, у якому об'єкти зберігаються тільки якщо ім'я не збігається з ім'ям, яке потрібно видалити
+    const filteredArray = array.filter(item => item.full_name !== nameToRemove);
+    return filteredArray;
+  }
+function favoriteStarButtonClicked(teacher, favoriteStarButton){
+    
+    if(teacher.favorite){
+        teacher.favorite = false;
+        favoriteStarButton.innerHTML = '<img src="images\\star-outline.svg" alt="Star Button Not Filled">';
+        favoriteTeachers = removeObjectByName(favoriteTeachers, teacher.full_name);
+        renderFavoriteTeachersTemplates(favoriteTeachers);
+        renderTeachersTemplates(finalArray);
+    }else{
+        teacher.favorite = true;
+        favoriteStarButton.innerHTML = '<img src="images\\star-filled.svg" alt="Star Button Filled">';
+        favoriteTeachers.push(teacher);
+        renderTeachersTemplates(finalArray);
+    }
+}
+
+
+function renderTeachersTemplates(arrOfTeachers){
+    const teachersCardsContainer = document.getElementById('teachersCardsContainer');
+    teachersCardsContainer.innerHTML="";
+    createTeacherCardsFromArray(arrOfTeachers, teachersCardsContainer, false);
+}
+
+function renderFavoriteTeachersTemplates(arrOfTeachers){
+    const favoriteTeachersCardsContainer = document.querySelector('#carouselOfTeacherCards .overflow');
+    favoriteTeachersCardsContainer.innerHTML="";
+    if(arrOfTeachers.length!==0){
+        createTeacherCardsFromArray(arrOfTeachers, favoriteTeachersCardsContainer, true);
+    }
+}
+
+
+function filterObjects(array, filters) {
+    return array.filter((item) => {
+        // Перевірка країни
+        if (filters.country && item.country !== filters.country && filters.country !=='all') {
+            return false;
+        }
+       
+        // Перевірка статі
+        if (filters.gender && item.gender !== filters.gender && filters.gender !=='all') {
+            return false;
+        }
+        // Перевірка favorite
+        if (typeof filters.favorite !== 'undefined' && item.favorite !== filters.favorite && filters.favorite===true) {
+            return false;
+        }
+         // Перевірка віку
+         if (filters.age && item.age !== filters.age || typeof(filters.age)==='string') {
+            if(typeof(filters.age)==='string' && filters.age!=='all') {
+             let numbers = [...filters.age.matchAll("[0-9]+")];
+             numbers = numbers.map((value) => Number(value));
+ 
+             if (filters.age.includes("<")) {
+                 return item.age < numbers[0];
+             } else if (filters.age.includes(">")) {
+                 return item.age > numbers[0];
+             } else if (filters.age.includes("-")) {
+                 let max = Math.min(numbers[0], numbers[1]);
+                 let min = Math.max(numbers[0], numbers[1]);
+                 return (item.age) > max && (item.age) < min;
+             }
+             return false;
+         }
+         }
+        // Якщо об'єкт відповідає всім умовам, повертаємо true
+        return true;
+    });
+}
+
+function handleFilters(array){
+        // Отримуємо посилання на елементи фільтрації
+    const ageSelect = document.getElementById('ageSelect');
+    const regionSelect = document.getElementById('regionSelect');
+    const sexSelect = document.getElementById('sexSelect');
+    const onlyWithPhotoCheckbox = document.getElementById('onlyWithPhoto');
+    const onlyFavoritesCheckbox = document.getElementById('onlyFavorites');
+
+    // Додаємо івент-слухач для фільтрів
+    ageSelect.addEventListener('change', () => applyFilters(array));
+    regionSelect.addEventListener('change', () => applyFilters(array));
+    sexSelect.addEventListener('change', () => applyFilters(array));
+    onlyWithPhotoCheckbox.addEventListener('change', () => applyFilters(array));
+    onlyFavoritesCheckbox.addEventListener('change', () => applyFilters(array));
+}
+function applyFilters(array) {
+    const ageSelect = document.getElementById('ageSelect');
+    const regionSelect = document.getElementById('regionSelect');
+    const sexSelect = document.getElementById('sexSelect');
+    const onlyWithPhotoCheckbox = document.getElementById('onlyWithPhoto');
+    const onlyFavoritesCheckbox = document.getElementById('onlyFavorites');
+
+    // Отримуємо значення фільтрів з елементів вводу
+    const ageFilter = ageSelect.value;
+    const regionFilter = regionSelect.value;
+    const sexFilter = sexSelect.value;
+    const onlyWithPhoto = onlyWithPhotoCheckbox.checked;
+    const onlyFavorites = onlyFavoritesCheckbox.checked;
+
+    // Створюємо об'єкт для фільтрів
+    const filters = {
+        age: ageFilter,
+        country: regionFilter,
+        gender: sexFilter,
+        favorite: onlyFavorites,
+        isPhoto: onlyWithPhoto, 
+    };
+
+    // Фільтруємо викладачів на основі обраних фільтрів
+    const filteredTeachers = filterObjects(array, filters);
+
+    // Відображаємо відфільтрованих викладачів на сторінці
+    renderTeachersTemplates(filteredTeachers);
+}
+
+
+function renderStatisticsTable(){
+    const table = document.getElementById("statisticsTable");
+    const headers = table.querySelectorAll("thead th");
+  
+    // Отримайте tbody для таблиці
+    const tbody = table.querySelector("tbody");
+  
+    // Функція для оновлення таблиці
+function updateTable(sortOrder, order) {
+       
+    while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+          }
+           // Початковий порядок сортування (за ім'ям, спеціальністю, країною та віком)
+          
+        let sortedTeacher = finalArray;
+        sortedTeacher = sortObjects(finalArray, sortOrder, order);
+      
+      // Додайте відсортовані дані до таблиці
+      sortedTeacher.forEach((item) => { 
+        const row = document.createElement("tr");
+        const keys = ["full_name", "course", "age", "gender", "country"];
+        keys.forEach((key) => {
+          const cell = document.createElement("td");
+          cell.textContent = item[key];
+          row.appendChild(cell);
+        });
+        tbody.appendChild(row);
+      });
+     
+    }
+    let order = 1;
+    // Функція для зміни sortOrder при кліку на заголовок стовпця
+    function handleHeaderClick(event) {
+      const clickedHeader = event.target.closest("th");
+      if (!clickedHeader) return;
+  
+      // Отримайте текс з заголовка
+      const headerText = clickedHeader.textContent.trim();
+      let sortOrder = "";
+     
+      // Визначте sortOrder на основі тексту заголовка
+      if (headerText === "Name ↓") sortOrder = "full_name";
+      else if (headerText === "Speciality ↓") sortOrder = "course";
+      else if (headerText === "Age ↓") sortOrder = "age";
+      else if (headerText === "Nationality ↓") sortOrder = "country";
+  
+
+      // Оновіть таблицю
+      updateTable(sortOrder, order*=-1);
+    }
+  
+    // Додайте обробник подій для заголовків стовпців
+    headers.forEach((header) => {
+      header.addEventListener("click", handleHeaderClick);
+    });
+  
+    // Початкове заповнення та сортування таблиці
+    updateTable(0);
+}
+
+function handleAddTeacherButtons(){
+    const addTeacherButtons = document.querySelectorAll('.addTeacherButton');
+    addTeacherButtons.forEach((button) => {button.addEventListener("click", () => {
+        showAddTeacherPopup();
+         });
+    });
+    const closePopupAddTeacher =  document.getElementById('closePopupAddTeacher');
+    closePopupAddTeacher.addEventListener("click",() => {
+        const teacherPopup = document.getElementById('addTeacherPopupBack');
+        teacherPopup.style.display="none";
+    } );
+}
+function showAddTeacherPopup(){
+    const teacherPopup = document.getElementById('addTeacherPopupBack');
+    teacherPopup.style.display="block";
+}
+
+
+
+function searchTeacherByValue(arr, value) {
+    return arr.filter((obj) => { 
+       if (typeof value === 'string') {
+            if((obj["full_name"]).toLowerCase().includes(value.toLowerCase()) || (obj["note"]).toLowerCase().includes(value.toLowerCase())){
+                return true;
+            }else return String(obj["age"]).includes(String(value));
+        }else return false;
+
+    });
+}
+function handleSearchFieldAndButton(){
+    document.querySelector('#addSpeciality').value;
+    const searchButton = document.querySelector('#searchButtonClick');
+    searchButton.addEventListener('click', () => {
+        searchTeacherButtonClicked();
+    });
+    const clearButton = document.getElementById('clearSearchButton');
+    clearButton.addEventListener('click', () => clearSearch());
+}
+function clearSearch(){
+    handleFilters(finalArray);
+    applyFilters(finalArray);
+   
+}
+function searchTeacherButtonClicked(){
+    const searchField = document.getElementById('searchField');
+    let value = searchField.value;
+    let searchArray;
+        if(value){
+            searchArray  = searchTeacherByValue(finalArray, value);
+            document.getElementById('ageSelect').value = "all";
+            document.getElementById('regionSelect').value = "all";
+            document.getElementById('sexSelect').value = "all";
+            document.getElementById('onlyWithPhoto').checked = false;
+            document.getElementById('onlyFavorites').checked = false;
+            handleFilters(searchArray);
+            renderTeachersTemplates(searchArray);
+        }
+
+
+
+}
+function createUserObject() {
+    // Отримуємо значення з полів форми
+    const name = document.querySelector('.addName').value;
+    const speciality = document.querySelector('#addSpeciality').value;
+    const country = document.querySelector('.addCountry').value;
+    const city = document.querySelector('.addCity').value;
+    const email = document.querySelector('.addEmail').value;
+    const phone = document.querySelector('.addPhone').value;
+    const dateOfBirth = document.querySelector('.addDate').value;
+    const gender = document.querySelector('input[name="sex"]:checked').value;
+    const bgColor = document.querySelector('.addBgColor').value;
+    const notes = document.querySelector('.addNotes').value;
+    
+    let dateOfBirthNums = [...dateOfBirth.matchAll("[0-9]+")];
+    let yearOfBirthArr = dateOfBirthNums.map((value) => Number(value));
+    let age = 2023 - yearOfBirthArr[0];
+    // Створюємо об'єкт користувача зі зібраними даними
+ 
+    let formatedUser = {
+        gender: gender,
+        title: "",
+        full_name: name,
+        city: city,
+        state: "",
+        country: country,
+        postcode: "",
+        coordinates: "",
+        timezone: "",
+        email: email,
+        b_date: dateOfBirth,
+        age: age,
+        phone: phone,
+        picture_large: gender==="male"? "images/male-default.svg" : "images/female-default.svg",
+        picture_thumbnail: "",
+        id: "",
+        favorite: false,
+        course: getRandomValue([
+            "Mathematics",
+            "Physics",
+            "English",
+            "Computer Science",
+            "Dancing",
+            "Chess",
+            "Biology",
+            "Chemistry",
+            "Law",
+            "Art",
+            "Medicine",
+            "Statistics",
+        ]),
+        bg_color: bgColor,
+        note: notes,
+    }
+    if(checkForDublicate(finalArray, formatedUser)){
+    finalArray.push(formatedUser);
+        }
+
+    renderStatisticsTable();
+    renderTeachersTemplates(finalArray);
+    
+  }
+function handleAddButtonForm(){
+    const addbuttonForm = document.getElementById('addTeacherButtonForm');
+    addbuttonForm.addEventListener("click", (event) => {
+        event.preventDefault();
+        createUserObject();
+    });
+  }
+  //повертає true, якщо дублікату не знайдено
+function checkForDublicate(arr, user){
+    for (const obj of arr) {
+        if (obj.full_name===user.full_name) {
+           return false;
+        }
+    }
+    return true;
+}
+
+  let finalArray = checkValid(result);
+  let favoriteTeachers = [];
+
+
+  window.onload = () => {
+   
+    renderTeachersTemplates(finalArray);
+    handleFilters(finalArray);
+    handleSearchFieldAndButton();
+    handleAddButtonForm();
+    renderStatisticsTable();
+    handleAddTeacherButtons();
+
+}
