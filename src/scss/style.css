@@ -1,7 +1,7 @@
 /* Import fonts */
 @import url("../fonts/Roboto.css");
 /* Reset and normalize */
-@import url("./normalize.css");
+@import url("../css/normalize.css");
 * {
   margin: 0px;
 }
@@ -57,6 +57,7 @@ header h1:hover {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: stretch;
+  justify-content: space-between;
 }
 
 .searchForm:hover {
@@ -71,15 +72,18 @@ header h1:hover {
   height: 1.2rem;
 }
 
+.button {
+  background: white;
+  font-weight: 550;
+  border: solid 1px rgb(238, 92, 75);
+  color: rgb(238, 92, 75);
+}
+
 .searchButton {
   margin-left: 10px;
   width: 2, 5rem;
   font-size: 0.5rem;
   height: 1.2rem;
-  background: white;
-  font-weight: 550;
-  border: solid 1px rgb(238, 92, 75);
-  color: rgb(238, 92, 75);
 }
 
 .searchButton:hover {
@@ -126,10 +130,6 @@ header h1:hover {
   width: 30%;
   font-size: 0.5rem;
   height: 1.2rem;
-  background: white;
-  font-weight: 550;
-  border: solid 1px rgb(238, 92, 75);
-  color: rgb(238, 92, 75);
 }
 
 .addTeacherButton:hover {
@@ -202,6 +202,11 @@ h2 {
   margin-right: 0.4rem;
 }
 
+#clearSearchButton {
+  margin: 10px 0px;
+  display: flex;
+}
+
 .teachersCardsContainer {
   margin: 20px 0px 10px 0;
   width: 100%;
@@ -266,7 +271,8 @@ h2 {
   transform: scale(1.2);
 }
 
-.nameText, .surnameText {
+.nameText,
+.surnameText {
   font-size: 0.6rem;
   font-weight: 650;
 }
@@ -319,15 +325,17 @@ h2 {
   border-bottom: solid 3px black;
 }
 .statisticsTable thead th:hover .tableArrow {
-  visibility: inherit;
-}
-
-.statisticsTable thead th {
-  padding: 2px;
+  visibility: visible;
 }
 
 .tableArrow {
   visibility: hidden;
+  display: inline-flex;
+  transition: transform 0.3s;
+}
+
+.statisticsTable thead th {
+  padding: 2px;
 }
 
 .underTableList {
@@ -359,6 +367,7 @@ h2 {
   flex-direction: row;
   position: relative;
   gap: 0 10px;
+  min-height: 7rem;
 }
 
 #carouselOfTeacherCards .arrowButton img {
@@ -415,10 +424,6 @@ footer {
           backdrop-filter: blur(5px);
 }
 
-.addTeacherPopupBack:target {
-  display: block;
-}
-
 .addTeacherPopup {
   position: fixed;
   top: 5vh;
@@ -452,10 +457,10 @@ footer {
 }
 
 .closePopup {
+  margin-right: 2vh;
   height: 8vh;
   align-items: center;
   padding: 0px;
-  margin-right: 5px;
   width: 1rem;
   display: flex;
   color: white;
@@ -493,7 +498,8 @@ footer {
   color: rgb(29, 25, 25);
 }
 
-.flexColumn input, .flexColumn select {
+.flexColumn input,
+.flexColumn select {
   color: rgb(29, 25, 25);
   margin-bottom: 3px;
   font-size: 1.5vh;
@@ -514,7 +520,11 @@ footer {
   font-size: 1.5vh;
 }
 
-.addCountry, .addCity, .addEmail, .addPhone, .addDate {
+.addCountry,
+.addCity,
+.addEmail,
+.addPhone,
+.addDate {
   width: 100%;
 }
 
@@ -578,16 +588,32 @@ footer {
   background-color: white;
 }
 
+.rightUpOfInfoPopupHeader {
+  display: flex;
+}
+
+.favoriteStarButton {
+  background-color: rgb(68, 64, 64);
+  border: 0px;
+}
+
 .photoPlusData div {
   width: 40%;
 }
 
 .photoPlusData img {
+  align-items: center;
   width: 100%;
 }
 
 .teacherInfoPopup img {
-  padding: 1vh;
+  vertical-align: -webkit-baseline-middle;
+  padding: 0;
+  width: 2vh;
+}
+
+.teacherInfoPopup .teacherPhotoInfoPopup {
+  margin: 0.7vh;
   width: 100%;
 }
 
@@ -642,11 +668,7 @@ footer {
   font-size: 0.4rem;
 }
 
-.teacherInfoPopupBack:target {
-  display: block;
-}
-
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .addTeacherPopup {
     top: 5vh;
     height: -moz-fit-content;
@@ -658,6 +680,10 @@ footer {
   }
 }
 @media screen and (max-width: 700px) {
+  .addTeacherPopup {
+    width: 50vw;
+    left: 25vw;
+  }
   .teachersCardsContainer {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
@@ -684,6 +710,13 @@ footer {
     width: 1.7rem;
     right: 15%;
   }
+  .addTeacherPopup {
+    top: 5vh;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: 70vw;
+    left: 15vw;
+  }
 }
 @media screen and (max-width: 500px) {
   .teachersCardsContainer {
@@ -693,10 +726,31 @@ footer {
     width: 1.7rem;
     right: 24%;
   }
+  .addTeacherPopup {
+    top: 5vh;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: 70vw;
+    left: 15vw;
+  }
 }
 @media screen and (max-width: 400px) {
   .teachersCardsContainer {
     grid-template-columns: 1fr;
+  }
+  .photo {
+    width: 12vh;
+    height: 12vh;
+  }
+  .noPhoto {
+    width: 12vh;
+    height: 12vh;
+  }
+  .roundedPhoto {
+    height: 18vh;
+  }
+  #carouselOfTeacherCards .roundedPhoto {
+    height: 18vh;
   }
   .star {
     width: 1.7rem;

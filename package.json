@@ -7,6 +7,7 @@
     "build": "rm -f build && cross-env NODE_ENV=production webpack --progress",
     "lint": "eslint src/js",
     "stylelint": "stylelint src/css"
+    
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -38,5 +39,7 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
 }
