@@ -466,6 +466,7 @@ function handleFilters(array) {
     onlyWithPhotoCheckbox.addEventListener('change', () => applyFilters(array));
     onlyFavoritesCheckbox.addEventListener('change', () => applyFilters(array));
 }
+
 function applyFilters(array) {
     const ageSelect = document.getElementById('ageSelect');
     const regionSelect = document.getElementById('regionSelect');
@@ -506,60 +507,60 @@ function renderStatisticsTable(arr) {
     const tbody = table.querySelector("tbody");
 
     // Функція для оновлення таблиці
-    function updateTable(sortOrder, order) {
-
+    function updateTable(sortParam, order, startPoint) {
         while (tbody.firstChild) {
             tbody.removeChild(tbody.firstChild);
         }
         // Початковий порядок сортування (за ім'ям, спеціальністю, країною та віком)
 
         let sortedTeacher = arr;
-        sortedTeacher = sortObjects(arr, sortOrder, order);
+        sortedTeacher = sortObjects(arr, sortParam, order);
 
         // Додайте відсортовані дані до таблиці
-        sortedTeacher.forEach((item) => {
+        for (let i = (startPoint - 1) * 10; i < (startPoint - 1) * 10 + 10 && i < sortedTeacher.length; i++) {
             const row = document.createElement("tr");
             const keys = ["full_name", "course", "age", "gender", "country"];
             keys.forEach((key) => {
                 const cell = document.createElement("td");
-                cell.textContent = item[key];
+                cell.textContent = sortedTeacher[i][key];
                 row.appendChild(cell);
             });
             tbody.appendChild(row);
-        });
+        }
     }
+
     let order = 1;
-    // Функція для зміни sortOrder при кліку на заголовок стовпця
+    let sortParam = "";
+    // Функція для зміни sortParam при кліку на заголовок стовпця
     function handleHeaderClick(event) {
         let clickedHeader = event.target.closest("th");
         if (!clickedHeader) return;
 
         // Отримайте текс з заголовка
         let headerText = clickedHeader.textContent.trim();
-        let sortOrder = "";
 
         // Визначте sortOrder на основі тексту заголовка
         if (headerText === "Name ↓") {
-            sortOrder = "full_name";
+            sortParam = "full_name";
         }
         else if (headerText === "Speciality ↓") {
-            sortOrder = "course";
+            sortParam = "course";
         }
         else if (headerText === "Gender ↓") {
-            sortOrder = "gender";
+            sortParam = "gender";
         }
         else if (headerText === "Age ↓") {
-            sortOrder = "age";
+            sortParam = "age";
         }
         else if (headerText === "Nationality ↓") {
-            sortOrder = "country";
+            sortParam = "country";
         }
         let arrows = document.querySelectorAll('.tableArrow');
         arrows.forEach((arrow) => {
             arrow.style.transform = `rotate(${order === 1 ? 0 : 180}deg)`;
         });
         // Оновіть таблицю
-        updateTable(sortOrder, order *= -1);
+        updateTable(sortParam, order *= -1, 1);
     }
 
     // Додайте обробник подій для заголовків стовпців
@@ -567,8 +568,29 @@ function renderStatisticsTable(arr) {
         header.addEventListener("click", handleHeaderClick);
     });
 
-    // Початкове заповнення та сортування таблиці
-    updateTable(0);
+    //Створює та хендлить список для перемикання між сторінками таблиці
+    function createAndHandleUnderTableList() {
+        const underTableList = document.getElementById("underTableList");
+        underTableList.innerHTML = "";
+
+        let amountOfli = arr.length % 10 > 0 && arr.length > 10 ? arr.length / 10 + 1 : arr.length / 10; //к-сть самих li, які потрібно створити
+        let numOfLi = 1; //номер вибраного li сторінки
+        for (let i = 0; i < amountOfli; i++) {
+            const li = document.createElement('li');
+            li.textContent = i + 1;
+            underTableList.appendChild(li);
+
+            li.addEventListener("click", (event) => {
+                let clickedLi = event.target.closest("#underTableList li");
+                numOfLi = clickedLi.textContent;
+                console.log(numOfLi);
+                updateTable(sortParam, order, numOfLi);
+            });
+        }
+    }
+
+    createAndHandleUnderTableList();
+    updateTable(0, order, 1);
 }
 
 function handleAddTeacherButtons() {
@@ -589,8 +611,6 @@ function showAddTeacherPopup() {
     teacherPopup.style.display = "block";
 }
 
-
-
 function searchTeacherByValue(arr, value) {
     return arr.filter((obj) => {
         if (typeof value === 'string') {
@@ -605,6 +625,7 @@ function searchTeacherByValue(arr, value) {
 
     });
 }
+
 function handleSearchFieldAndButton() {
     document.querySelector('#addSpeciality').value;
     const searchButton = document.querySelector('#searchButtonClick');
@@ -614,11 +635,13 @@ function handleSearchFieldAndButton() {
     const clearButton = document.getElementById('clearSearchButton');
     clearButton.addEventListener('click', () => clearSearch());
 }
+
 function clearSearch() {
     handleFilters(finalArray);
     applyFilters(finalArray);
 
 }
+
 function searchTeacherButtonClicked() {
     const searchField = document.getElementById('searchField');
     let value = searchField.value;
@@ -634,10 +657,8 @@ function searchTeacherButtonClicked() {
         renderTeachersTemplates(searchArray);
         renderStatisticsTable(searchArray);
     }
-
-
-
 }
+
 function createUserObject() {
     // Отримуємо значення з полів форми
     const name = document.querySelector('.addName').value;
@@ -690,20 +711,19 @@ function createUserObject() {
         bg_color: bgColor,
         note: notes,
     }
+
     if (checkForDublicate(finalArray, formatedUser)) {
         finalArray.push(formatedUser);
     }
-
+    
     renderStatisticsTable(finalArray);
     renderTeachersTemplates(finalArray);
     fetchUser(formatedUser);
-
 }
 
 function fetchUser(formatedUser) {
     try {
-        
-    // Виконання запиту за допомогою fetch
+        // Виконання запиту за допомогою fetch
         fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: {
@@ -722,6 +742,7 @@ function fetchUser(formatedUser) {
         console.error("Все погано, Помилка при відправленні даних:", error);
     }
 }
+
 function handleAddButtonForm() {
     const addForm = document.getElementById('addTeacherForm');
     addForm.addEventListener("submit", (event) => {
@@ -729,6 +750,7 @@ function handleAddButtonForm() {
         createUserObject();
     });
 }
+
 //повертає true, якщо дублікату не знайдено
 function checkForDublicate(arr, user) {
     for (const obj of arr) {
@@ -762,15 +784,13 @@ async function fetchRandomTeachers(numOfTeachers) {
         .catch(error => {
             console.error(error);
         });
-
-
 }
-function handleTenMoreButton() {
-    const tenMoreButt = document.getElementById("tenMoreButton");
-    tenMoreButt.addEventListener("click", () => {
-        fetchRandomTeachers(10);
-    })
 
+function handleTenMoreButton() {
+    const tenMoreButton = document.getElementById("tenMoreButton");
+    tenMoreButton.addEventListener("click", () => {
+        fetchRandomTeachers(10);
+    });
 }
 
 window.onload = () => {
@@ -780,9 +800,6 @@ window.onload = () => {
             handleSearchFieldAndButton();
             handleAddButtonForm();
             handleAddTeacherButtons();
-            console.log(finalArray);
         });
     handleTenMoreButton();
-
-
 }
