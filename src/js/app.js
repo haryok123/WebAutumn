@@ -629,7 +629,8 @@ function searchTeacherByValue(arr, value) {
 function handleSearchFieldAndButton() {
     document.querySelector('#addSpeciality').value;
     const searchButton = document.querySelector('#searchButtonClick');
-    searchButton.addEventListener('click', () => {
+    searchButton.addEventListener('click', (event) => {
+        event.preventDefault();
         searchTeacherButtonClicked();
     });
     const clearButton = document.getElementById('clearSearchButton');
