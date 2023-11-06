@@ -455,7 +455,8 @@ function filterObjects(array, filters) {
         // Перевірка віку
         if (filters.age && item.age !== filters.age || _.isString(filters.age)) {
             if (_.isString(filters.age) && filters.age !== 'all') {
-                const numbers = _.map(_.toNumber(_.words(filters.age, /[^<>\-]+/g)), Number);
+                let numbers = [...filters.age.matchAll("[0-9]+")];
+                numbers = numbers.map((value) => Number(value));
 
                 if (filters.age.includes("<")) {
                     return item.age < numbers[0];
@@ -878,22 +879,16 @@ function renderCharts(arr) {
 }
 
 function renderChart(chart, arrOflabels, arrOfData) {
+    let arrOfColors = [];
+    for(let i = 0; i < arrOfData.length; i++){
+        arrOfColors.push(createHexCode());
+    }
     chart.data.labels = arrOflabels;
     chart.data.datasets[0].data = arrOfData;
 
-    chart.data.datasets[0].backgroundColor = getRandomColor();
+    chart.data.datasets[0].backgroundColor = arrOfColors;
 
     chart.update();
-}
-
-
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
 }
 
 function createCharts() {
