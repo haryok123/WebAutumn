@@ -375,7 +375,6 @@ h2 {
 }
 
 .overflow {
-
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
@@ -670,6 +669,7 @@ footer {
     text-align: left;
 }
 
+
 .email {
     color: blue;
 }
@@ -686,6 +686,17 @@ footer {
     display: flex;
     text-align: left;
     font-size: 0.4rem;
+}
+#pieChartsContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between
+}
+.chartHeader{
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: larger;
 }
 
 @media screen and (max-width: 1000px) {
