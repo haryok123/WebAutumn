@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "gender": "male",
+      "title": "",
+      "full_name": "sssssssss",
+      "city": "sssssss",
+      "state": "",
+      "country": "Ukraine",
+      "postcode": "",
+      "coordinates": "",
+      "timezone": "",
+      "email": "sdf@asd",
+      "b_date": "2023-10-11",
+      "age": 0,
+      "phone": "344444444444234",
+      "picture_large": "images/male-default.svg",
+      "picture_thumbnail": "",
+      "id": 1,
+      "favorite": false,
+      "course": "Law",
+      "bg_color": "#000000",
+      "note": ""
+    },
+    {
+      "gender": "male",
+      "title": "",
+      "full_name": "ssssss",
+      "city": "sssssss",
+      "state": "",
+      "country": "Ukraine",
+      "postcode": "",
+      "coordinates": "",
+      "timezone": "",
+      "email": "sdf@asd",
+      "b_date": "2023-10-11",
+      "age": 0,
+      "phone": "344444444444234",
+      "picture_large": "images/male-default.svg",
+      "picture_thumbnail": "",
+      "id": 2,
+      "favorite": false,
+      "course": "Biology",
+      "bg_color": "#000000",
+      "note": ""
+    }
+  ]
+}
